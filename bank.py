@@ -90,8 +90,15 @@ class Admin:
         
     # see all list account
     def all_list_account(self):
-        for single in User.accounts:
-            print(single)
+        for account_number, user in User.accounts.items():
+            print("---------------------------")
+            print(f"Account number :", account_number)
+            print(f"name : {user.name}")
+            print(f"email : {user.email}")
+            print(f"address : {user.address}")
+            print(f"account type : {user.type}")
+            print("------------------------")
+       
     
     # check total available balance
     def total_balance(self):
@@ -125,6 +132,7 @@ while True:
             print("4. check the total balance of the bank")
             print("5. check the total loan amount")
             print("6. on or off the loan feature of the bank")
+            print("7. exit")
             
             choice = int(input("Enter your option :"))
             if choice==1:
@@ -145,6 +153,8 @@ while True:
             elif choice==6:
                 status= input("Enter your status True or False :")
                 admin.loan_status(status)
+            elif choice==7:
+                break
             else:
                 print("Invalid choice :")
                 break
