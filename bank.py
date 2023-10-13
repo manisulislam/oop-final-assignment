@@ -26,7 +26,9 @@ class User:
     
     # withdraw functionality
     def withdraw(self, amount):
-        if amount<self.current_balance:
+        if User.total_balance==0:
+            print(f"The bank is bankrupt.")
+        elif amount<self.current_balance:
             self.current_balance-=amount
             self.transaction_history.append(f"congratulation...!!!{self.name} your {amount} amount withdraw successfully..")
             print(f"{self.name} your withdraw successfully...!!, your current balance is {self.current_balance} taka..")
@@ -46,19 +48,21 @@ class User:
     
     # loan functionality
     def loan(self, amount):
-        x=User.count_loan
-        if User.count_loan<2:
-            self.current_balance+=amount
-            User.loan_balance+=amount
-            User.count_loan+=1
-            print(User.count_loan)
-            self.transaction_history.append(f"congratulation...!!!{self.name} your {amount} amount loan successfully..")
-            print(f"{self.name} you take loan.. your current balance is {self.current_balance} taka..")
-    
-            
+        # x=User.count_loan
+        if Admin.status_loan==True:
+            if User.count_loan<2:
+                self.current_balance+=amount
+                User.loan_balance+=amount
+                User.count_loan+=1
+                print(User.count_loan)
+                self.transaction_history.append(f"congratulation...!!!{self.name} your {amount} amount loan successfully..")
+                print(f"{self.name} you take loan.. your current balance is {self.current_balance} taka..")
+        
+                
+            else:
+                print(f"{self.name} your can not loan more than two times..")
         else:
-            print(f"{self.name} your can not loan more than two times..")
-           
+            print("Bank can not offer bank loan...")
     # transfer money functionality
     def transfer(self, recipient_account_number, amount):
         if recipient_account_number in User.accounts and recipient_account_number != self.accNumber:
@@ -75,6 +79,8 @@ class User:
             print("Recipient account does not exist or is invalid.")
 class Admin:
     
+    # loan status initially true
+    status_loan=True
     # create account functionality
     def create_acc(self, name, email, address, acc_type):
         user= User(name, email, address,acc_type)
@@ -109,10 +115,10 @@ class Admin:
     
     # loan on or of
     def loan_status(self, status):
-        if status==True:
-            pass
+        if status==True or status==False:
+            Admin.status_loan=status
         else:
-            pass
+            print("Invalid.. use (True or False)...")
         
 
 while True:
