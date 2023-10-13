@@ -14,8 +14,8 @@ class User:
         self.current_balance=0
         self.transaction_history=[]
          
-        user= User(name, email, address,acc_type)
-        User.accounts[user.accNumber]=user
+        # user= User(name, email, address,acc_type)
+        # User.accounts[user.accNumber]=user
         
        
     
@@ -53,7 +53,7 @@ class User:
     # loan functionality
     def loan(self, amount):
         # x=User.count_loan
-        if Admin.status_loan==True:
+        if Admin.status_loan==1:
             if User.count_loan<2:
                 self.current_balance+=amount
                 User.loan_balance+=amount
@@ -84,7 +84,7 @@ class User:
 class Admin:
     
     # loan status initially true
-    status_loan=True
+    status_loan=1
     # create account functionality
     def create_acc(self, name, email, address, acc_type):
         user= User(name, email, address,acc_type)
@@ -119,7 +119,7 @@ class Admin:
     
     # loan on or of
     def loan_status(self, status):
-        if status==True or status==False:
+        if status==1 or status==0:
             Admin.status_loan=status
         else:
             print("Invalid.. use (True or False)...")
@@ -162,7 +162,7 @@ while True:
             elif choice==5:
                 admin.total_loan_amount()
             elif choice==6:
-                status= input("Enter your status True or False :")
+                status= int(input("Enter your status True=1 or False=0 :"))
                 admin.loan_status(status)
             elif choice==7:
                 break
