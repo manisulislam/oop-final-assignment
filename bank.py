@@ -13,6 +13,10 @@ class User:
         self.accNumber= User.acc
         self.current_balance=0
         self.transaction_history=[]
+         
+        user= User(name, email, address,acc_type)
+        User.accounts[user.accNumber]=user
+        
        
     
     
@@ -54,7 +58,7 @@ class User:
                 self.current_balance+=amount
                 User.loan_balance+=amount
                 User.count_loan+=1
-                print(User.count_loan)
+                
                 self.transaction_history.append(f"congratulation...!!!{self.name} your {amount} amount loan successfully..")
                 print(f"{self.name} you take loan.. your current balance is {self.current_balance} taka..")
         
@@ -125,8 +129,9 @@ while True:
     print("Choose your option as a admin or user :")
     print("1.Admin")
     print("2.User")
+    print("3.Exit")
     
-    op= int(input("press 1 or 2 :"))
+    op= int(input("press 1 or 2 or 3 :"))
     admin=Admin()
     if op==1:
         while True:
@@ -256,7 +261,8 @@ while True:
                     break
                 
 
-        
+    elif op==3:
+        break
     
     
     
